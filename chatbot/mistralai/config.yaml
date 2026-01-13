@@ -1,0 +1,21 @@
+github:
+  repos:
+    - owner: huggingface
+      repo: blog
+      path: /
+
+    - owner: huggingface
+      repo: transformers
+      path: docs/source/en
+
+    - owner: huggingface
+      repo: peft
+      path: docs/source
+
+    - owner: huggingface
+      repo: accelerate
+      path: docs/source
+
+jsonl_database_path: data/docs_en_2026_01_13.jsonl
+recreate_chroma_db: false
+chat_type: "memory_chat"  # Options: "qa" or "memory_chat"

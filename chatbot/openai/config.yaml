@@ -1,0 +1,29 @@
+# =================================================
+# Configuration for text_extractor.py
+# =================================================
+
+github:
+  repos:
+    - owner: huggingface
+      repo: blog
+      path: /
+
+    - owner: huggingface
+      repo: transformers
+      path: docs/source/en
+
+    - owner: huggingface
+      repo: peft
+      path: docs/source
+
+    - owner: huggingface
+      repo: accelerate
+      path: docs/source
+
+jsonl_database_path: data/docs_en_2025_12_26.jsonl
+
+# =================================================
+# Configuration for conversation_ai.py
+# =================================================
+recreate_chroma_db: true
+chat_type: qa  # Options: "qa" or "memory_chat"
