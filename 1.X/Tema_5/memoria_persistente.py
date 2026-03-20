@@ -1,0 +1,58 @@
+from dotenv import load_dotenv
+from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_mistralai import ChatMistralAI
+from langgraph.graph import START, MessagesState, StateGraph
+from langgraph.checkpoint.sqlite import SqliteSaver
+import sqlite3
+
+load_dotenv()
+
+llm = ChatMistralAI(model="mistral-large-latest", temperature=0)
+
+workflow = StateGraph(state_schema=MessagesState)
+
+
+# Nodos del grafo
+def chatbot_node(state):
+    """Nodo que procesa mensajes y genera respuestas."""
+    system_prompt = "Eres un asistente amigable que recuerda conversaciones previas."
+    messages = [SystemMessage(content=system_prompt)] + state["messages"]
+    response = llm.invoke(messages)
+    return {"messages": [response]}
+
+
+workflow.add_node("chatbot", chatbot_node)
+workflow.add_edge(START, "chatbot")
+
+# Compilar el grafo
+conn = sqlite3.connect("historial.db", check_same_thread=False)
+memory = SqliteSaver(conn)
+app = workflow.compile(checkpointer=memory)
+
+
+def chat(message, thread_id="sesion_terminal"):
+    config = {"configurable": {"thread_id": thread_id}}
+    result = app.invoke({"messages": [HumanMessage(content=message)]}, config)
+    return result["messages"][-1].content
+
+
+if __name__ == "__main__":
+    print("Chat en terminal (escribe 'salir' para terminar)\n")
+    session_id = "sesion_terminal"
+
+    while True:
+        try:
+            user_input = input("Tú: ").strip()
+        except (EOFError, KeyboardInterrupt):
+            print("\nHasta luego!")
+            break
+
+        if not user_input:
+            continue
+
+        if user_input.lower() in {"salir", "exit", "quit"}:
+            print("\nHasta luego!")
+            break
+
+        respuesta = chat(user_input, session_id)
+        print("Asistente:", respuesta)

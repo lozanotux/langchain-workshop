@@ -89,6 +89,10 @@ python ingest.py
 streamlit run app.py
 ```
 
+## **Actualizaciones**
+
+**[20-03-2026]** - LangChain ha cambiado mucho sus importaciones y ha hecho una reorganización de su API. Además se han agregado nuevos frameworks como LangGraph, LangSmith, etc. Por lo tanto se incluye nuevo contenido dentro de la carpeta [1.X](./1.X/README.md).
+
 ## **Contribuciones**
 
 Este proyecto es de código abierto y aprecio cualquier contribución. Estoy particularmente interesado en las siguientes mejoras:
