@@ -12,6 +12,10 @@
 
 Este repositorio contiene materiales y ejemplos prácticos para aprender a utilizar LangChain, una biblioteca de Python para construir aplicaciones con modelos de lenguaje grandes (LLMs). El enfoque principal del workshop es enseñar cómo extraer, procesar y utilizar información de documentos para crear chatbots y otras aplicaciones interactivas.
 
+## **Actualizaciones**
+
+**[20-03-2026]** - LangChain ha cambiado mucho sus importaciones y ha hecho una reorganización de su API. Además se han agregado nuevos frameworks como LangGraph, LangSmith, etc. Por lo tanto se incluye nuevo contenido dentro de la carpeta [1.X](./1.X/README.md).
+
 ## Prerrequisitos para los Notebooks
 
 - Python 3.11 (fue elaborado con esta versión)
@@ -88,10 +92,6 @@ python ingest.py
 ```sh
 streamlit run app.py
 ```
-
-## **Actualizaciones**
-
-**[20-03-2026]** - LangChain ha cambiado mucho sus importaciones y ha hecho una reorganización de su API. Además se han agregado nuevos frameworks como LangGraph, LangSmith, etc. Por lo tanto se incluye nuevo contenido dentro de la carpeta [1.X](./1.X/README.md).
 
 ## **Contribuciones**
 
